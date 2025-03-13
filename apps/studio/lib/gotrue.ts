@@ -75,7 +75,7 @@ export const getReturnToPath = (fallback = '/projects') => {
     validReturnTo = fallback
   } catch (_) {
     // sanitize returnTo path
-    const safePathPattern = /^\/[a-zA-Z0-9/_-]*$/
+    const safePathPattern = /^\/[a-zA-Z0-9/_?=-]*$/
     validReturnTo = safePathPattern.test(returnTo) ? fallback : returnTo
   }
 
