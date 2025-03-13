@@ -74,11 +74,9 @@ export const getReturnToPath = (fallback = '/projects') => {
     // if no error, returnTo is a valid URL and NOT an internal page
     validReturnTo = fallback
   } catch (_) {
-    // check returnTo doesn't try trick the browser to redirect
-    // don't try sanitize, it is a losing battle. Go to fallback
-    // disallow anything that starts with /non-word-char+/ or non-char+/
-    const pattern = /^\/?[\W]+\//
-    validReturnTo = pattern.test(returnTo) ? fallback : returnTo
+    // sanitize returnTo path
+    const safePathPattern = /^\/[a-zA-Z0-9/_-]*$/
+    validReturnTo = safePathPattern.test(returnTo) ? fallback : returnTo
   }
 
   const [path, existingQuery] = validReturnTo.split('?')
